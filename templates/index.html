@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Website</title>
+  <link rel="stylesheet" href="./static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {selectedCustomer}
+    <div>
+      <table id="customersTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Country</th>
+            <th>Credit Limit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="c in customers" :key="c.customerNumber">
+            <td>{ c.customerNumber }</td>
+            <td>
+              <a href="" @click.prevent="showDetails(c)">
+                { c.customerName }
+              </a>
+            </td>
+            <td>{ c.addressLine1 } { c.addressLine2 }</td>
+            <td>{ c.country }</td>
+            <td>{ c.creditLimit }</td>
+          </tr>
+        </tbody>
+      </table>  
+    </div>
+    
+  </div>
+  <script src="./static/main.js"></script>
+
+</body>
+
+</html>
