@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Website</title>
+  <link rel="stylesheet" href="./static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <div v-show="show">
+      <button @click.prevent="shows()">back</button>
+      <h2>Customer Details</h2>
+      <form @submit.prevent="updateCustomer">
+        <div>
+          <label for="customerNumber">Customer Number:</label>
+          <input type="text" id="customerNumber" v-model="selectedCustomer.customerNumber" :disabled="true">
+        </div>
+        <div>
+          <label for="customerName">Customer Name:</label>
+          <input type="text" id="customerName" v-model="selectedCustomer.customerName" :disabled="true">
+        </div>
+        <div>
+          <label for="contactFirstName">Contact First Name:</label>
+          <input type="text" id="contactFirstName" v-model="selectedCustomer.contactFirstName" :disabled="!show">
+        </div>
+        <div>
+          <label for="contactLastName">Contact Last Name:</label>
+          <input type="text" id="contactLastName" v-model="selectedCustomer.contactLastName" :disabled="!show">
+        </div>
+        <div>
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone" v-model="selectedCustomer.phone" :disabled="true">
+        </div>
+        <div>
+          <label for="addressLine1">Address Line 1:</label>
+          <input type="text" id="addressLine1" v-model="selectedCustomer.addressLine1" :disabled="true">
+        </div>
+        <div>
+          <label for="addressLine2">Address Line 2:</label>
+          <input type="text" id="addressLine2" v-model="selectedCustomer.addressLine2" :disabled="true">
+        </div>
+        <div>
+          <label for="city">City:</label>
+          <input type="text" id="city" v-model="selectedCustomer.city" :disabled="true">
+        </div>
+        <div>
+          <label for="state">State:</label>
+          <input type="text" id="state" v-model="selectedCustomer.state" :disabled="true">
+        </div>
+        <div>
+          <label for="postalCode">Postal Code:</label>
+          <input type="text" id="postalCode" v-model="selectedCustomer.postalCode" :disabled="true">
+        </div>
+        <div>
+          <label for="country">Country:</label>
+          <input type="text" id="country" v-model="selectedCustomer.country" :disabled="true">
+        </div>
+        <div>
+          <label for="salesRepEmployeeNumber">Sales Rep Employee Number:</label>
+          <input type="text" id="salesRepEmployeeNumber" v-model="selectedCustomer.salesRepEmployeeNumber" :disabled="true">
+        </div>
+        <div>
+          <label for="creditLimit">Credit Limit:</label>
+          <input type="text" id="creditLimit" v-model="selectedCustomer.creditLimit" :disabled="true">
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+    
+    <div v-show="!show">
+      <div>
+        <label for="search">Search by first or last name:</label>
+        <input type="text" id="search" v-model="searchTerm">
+      </div>
+      <table id="customersTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Country</th>
+            <th>Credit Limit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="c in filteredCustomers" :key="c.customerNumber">
+            <td>{ c.customerNumber }</td>
+            <td>
+              <a href="" @click.prevent="showDetails(c)">
+                { c.customerName }
+              </a>
+            </td>
+            <td>{ c.addressLine1 } { c.addressLine2 }</td>
+            <td>{ c.country }</td>
+            <td>{ c.creditLimit }</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  <script src="./static/main.js"></script>
+
+</body>
+
+</html>
